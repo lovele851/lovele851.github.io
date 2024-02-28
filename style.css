@@ -1,62 +1,106 @@
-body {
-    background: rgb(125, 198, 205);
-    color: rgb(45, 45, 45);
-    padding: 10px;
-    font-family: arial;
-}
-#all-contents {
-  max-width: 800px;
-    margin: auto;
-}
-
-/* navigation menu */
-nav {
-    background: rgb(239, 80, 41);
-   margin: 0 auto;
-    display: flex;
-    padding: 10px;
-}
-h1 {
-    display: flex;
-    align-items: center;
-    color: white;
-    flex: 1;
-    margin: 0;
-}
-#nav-ul {
-    list-style-image: none;
-}
-.nav-li {
-    display: inline-block;
-    padding: 0 10px;
-}
-a {
-    text-decoration: none;
-    color: #fff;
-}
-
-/* main container area beneath menu */
-main {
-    background: rgb(245, 238, 219);
-    display: flex;
-}
-.sidebar {
-    margin-right: 25px;
-    padding: 10px;
-}
-.sidebar-img {
-    width: 200px;
-}
-.content {
-    flex: 1;
-    padding: 15px;
-}
-
-/* portfolio styles */
-#interests {
-    border: 4px silver ridge;
-    padding: 8px;
-}
-h2, h3 {
-    margin: 0px;
-}
+$(function () {
+   // initialize canvas and context when able to
+   canvas = document.getElementById("canvas");
+   ctx = canvas.getContext("2d");
+   window.addEventListener("load", loadJson);
+  
+  
+   function setup() {
+     if (firstTimeSetup) {
+       halleImage = document.getElementById("player");
+       projectileImage = document.getElementById("projectile");
+       cannonImage = document.getElementById("cannon");
+       $(document).on("keydown", handleKeyDown);
+       $(document).on("keyup", handleKeyUp);
+       firstTimeSetup = false;
+       //start game
+       setInterval(main, 1000 / frameRate);
+     }
+     //create walls
+     createPlatform(-50, -50, canvas.width + 100, 50); //top
+     createPlatform(-50, canvas.height - 10, canvas.width + 100, 200); //right
+     createPlatform(-50, -50, 50, canvas.height + 500); //bottom
+     createPlatform(canvas.width, -50, 50, canvas.height + 100);
+  
+  
+    
+  
+  
+     createPlatform(600, 200, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(700, 200, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(800, 200, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(950, 400, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(1000, 400, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(400, 300, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(1200, 300, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(1200, 320, 200, 100); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(300, 535, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(100, 650, 200, 30); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(700, 650, 100, 100); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(800, 520, 600, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+     createPlatform(100, 400, 200, 20); // short but wide platform located 100 pixels from the left of the screen and 100 pixels from the bottom of the screen
+  
+  
+  createCollectable("steve", 750, 300, 20, 0.5); // creates a "steve" collectible at the coordinates (500, 300), falling with a high gravity and bouncing with 50% bounce
+  createCollectable("grace", 850, 300); // creates a "grace" collectible at the coordinates (500, 300), falling with default gravity and bouncing with default bounce %
+  createCollectable("diamond", 400, 200); // creates a "diamond" collectible at the coordinates (400, 200), falling with high gravity and bouncing with 75% bounce
+  
+  
+  createCannon("left", 490, 1000); // cannon on right wall, 200px down, shooting twice per second
+  createCannon("right", 400, 1000); // cannon on left wall, 400px down, shooting once per second
+  createCannon("left", 100, 1000); // cannon on right wall, 500px down, shooting triple per second
+  
+  
+     /////////////////////////////////////////////////
+     //////////ONLY CHANGE BELOW THIS POINT///////////
+     /////////////////////////////////////////////////
+  
+  
+     // TODO 1
+     // Create platforms
+     // You must decide the x position, y position, width, and height of the platforms
+     // example usage: createPlatform(x,y,width,height)
+  
+  
+  
+  
+  
+  
+    
+     // TODO 2
+     // Create collectables
+     // You must decide on the collectable type, the x position, the y position, the gravity, and the bounce strength
+     // Your collectable choices are 'database' 'diamond' 'grace' 'kennedi' 'max' and 'steve'; more can be added if you wish
+     // example usage: createCollectable(type, x, y, gravity, bounce)
+  
+  
+  
+  
+  
+  
+  
+  
+     // TODO 3
+     // Create cannons
+     // You must decide the wall you want the cannon on, the position on the wall, and the time between shots in milliseconds
+     // Your wall choices are: 'top' 'left' 'right' and 'bottom'
+     // example usage: createCannon(side, position, delay, width, height)
+  
+  
+  
+  
+  
+  
+  
+  
+     /////////////////////////////////////////////////
+     //////////ONLY CHANGE ABOVE THIS POINT///////////
+     /////////////////////////////////////////////////
+   }
+  
+  
+   registerSetup(setup);
+  });
+  
+  
+  
